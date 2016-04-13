@@ -1,0 +1,8 @@
+node_modules
+.idea
+PDF
+dist
+.DS_Store
+.iml
+/build
+npm-debug.log
