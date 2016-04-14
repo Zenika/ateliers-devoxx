@@ -8,14 +8,15 @@ import (
 )
 
 func TestPrintHello(t *testing.T){
-	rescueStdout := os.Stdout
+	osStdout := os.Stdout
 	r, w, _ := os.Pipe()
 	os.Stdout = w
 	printHelloWorld()
 	w.Close()
 	out, _ := ioutil.ReadAll(r)
-	os.Stdout = rescueStdout
-	if strings.EqualFold(string(out), "hello world") {
+	os.Stdout = osStdout
+	outputString := strings.TrimSpace(string(out))
+	if !strings.EqualFold(outputString, "hello world") {
 		t.Fatal("expected hello world, got", string(out))
 	}
 }
