@@ -191,7 +191,7 @@ WHERE p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
 RETURN c, collect(r.role)
 ```
 
-## Une affaire de famille ? 
+## Une affaire de famille ?
 
 ```
 MATCH (p:Person)-[:FAMILY]-(p2)
@@ -203,3 +203,15 @@ RETURN p, p2, c, c2
 
 Si le président n'est directement impliqué que dans une seule entreprise offshore,
 on ne peut pas en dire autant du cercle famillial dans son ensemble.
+
+## Le rôle des intermédiaires
+
+```
+MATCH (president:Person {first_name:'Ilham'})-[r*]->(account:Company)
+MATCH (account)-[t]-(middlemen:Company)
+RETURN account, middlemen, president
+```
+
+Le président n'est lié qu'avec une entreprise offshore, mais on se rend
+compte que ce lien lui ouvert de nombreuses entreprises offshore, et que des liens
+entre ces sociétés ont été créés (relations clients / fournisseurs, etc. )
