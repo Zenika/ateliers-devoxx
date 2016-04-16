@@ -1,9 +1,22 @@
 ## Prérequis pour dérouler les exercices
 
-Ce fichier servira comme guide pour configurer les laptops que nous porterons à Devoxx.
+### Docker
 
-Il faudra lister tous les outils nécessaires pour dérouler les TP (frameworks, IDE, dépendances, etc...).
+Docker : https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
-#### Attention :
-1. Les laptop utiliseront Linux comme OS
-2. Ne comptez pas trop sur la connection Internet le jour de l'atelier : pensez à inclure tout ce qui permettrait de dérouler les TP en mode offline.
+### Neo4j
+
+Neo4j tournant dans un docker.
+
+Pour le TP pas besoin d'un volume persistant :
+```
+docker run --detach --name neo4j --publish 7474:7474 neo4j
+```
+
+Pour lancer le conteneur Neo4j avec un volume :
+```
+docker run --detach --name neo4j --publish 7474:7474 \
+           --volume $HOME/neo4j/data:/data neo4j
+```
+
+Le console Neo4j sera disponible à l'adresse http://localhost:7474/browser
