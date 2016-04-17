@@ -1,7 +1,9 @@
-organization in ThisBuild := "sample.helloworld"
+organization in ThisBuild := "zenika.devoxx"
 
 // the Scala version that will be used for cross-compiled libraries
 scalaVersion in ThisBuild := "2.11.7"
+
+
 
 lazy val twitterServiceApi = project("twitterService-api")
   .settings(
@@ -16,7 +18,8 @@ lazy val twitterServiceImpl = project("twitterService-impl")
     libraryDependencies ++= Seq(
       lagomJavadslPersistence,
       lagomJavadslTestKit,
-      "com.twitter" % "hbc-core" % "2.2.0"
+      "org.twitter4j" % "twitter4j-stream" % "4.0.4" ,
+      lagomJavadslPubSub
     )
   )
   .settings(lagomForkedTestSettings: _*)
