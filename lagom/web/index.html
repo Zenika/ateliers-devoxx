@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operations</title>
+    <script src="js/jquery-2.2.3.min.js" type="application/javascript"></script>
+</head>
+<body>
+
+<script type="application/javascript">
+
+    $(function () {
+
+
+        socket.onopen = function () {
+            console.log("open")
+        };
+        socket.onmessage = function () {
+            console.log("change")
+        };
+
+
+        $.get("http://localhost:9000/api/hello/Louis", function (data) {
+
+            console.log("data" + data);
+            $("#resultat").html(" resultat : " + data);
+
+        });
+
+        $("#sender").click(function (e) {
+            console.log("send!");
+            $.get("http://localhost:9000/api/hello/Louis", function (data) {
+
+                console.log("data" + data);
+                $("#resultat").html(" fom button : " + data);
+            });
+        })
+    });
+
+
+</script>
+
+
+<div id="resultat">test</div>
+<div id="streamResultat">test</div>
+<div id="send">
+    <button value="Send!" id="sender">send!</button>
+</div>
+</body>
+</html>
