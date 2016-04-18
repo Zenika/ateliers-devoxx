@@ -5,15 +5,11 @@ package com.zenika.twitter.api;
 
 import akka.NotUsed;
 import akka.stream.javadsl.Source;
-import akka.util.ByteString;
 import com.lightbend.lagom.javadsl.api.Descriptor;
 import com.lightbend.lagom.javadsl.api.Service;
 import com.lightbend.lagom.javadsl.api.ServiceCall;
 
-import java.util.List;
-
-import static com.lightbend.lagom.javadsl.api.Service.named;
-import static com.lightbend.lagom.javadsl.api.Service.pathCall;
+import static com.lightbend.lagom.javadsl.api.Service.*;
 
 /**
  * The tweets service interface.
@@ -26,12 +22,15 @@ public interface TwitterService extends Service {
     /**
      * Example: curl http://localhost:9000/api/hello/Alice
      */
-    ServiceCall<String, NotUsed, Source<String, ?>> tweets();
+    ServiceCall<NotUsed, NotUsed, Source<String, ?>> tweets();
+
+    ServiceCall<String, NotUsed, NotUsed> updatefilter();
 
     @Override
     default Descriptor descriptor() {
         return named("twitterservice").with(
-                pathCall("/api/twitter/:term", tweets())
-        ).withAutoAcl(true);
+                namedCall("/api/twitter", tweets()),
+                pathCall("/api/twitter/:filter", updatefilter()))
+                .withAutoAcl(true);
     }
 }
