@@ -161,7 +161,7 @@ MATCH (c:Company) RETURN c
 ## Détailler les membres d'une famille
 
 Dans la précédente requête, on note la présence d'un personnage important :
-Ilham Aliyev, les président de l'Azebaïdjan.
+Ilham Aliyev, le président de l'Azebaïdjan.
 
 Essayons de voir les membres de sa famille présents dans notre jeu de données :
 
