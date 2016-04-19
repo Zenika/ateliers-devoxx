@@ -215,3 +215,11 @@ RETURN account, middlemen, president
 Le président n'est lié qu'avec une entreprise offshore, mais on se rend
 compte que ce lien lui ouvert de nombreuses entreprises offshore, et que des liens
 entre ces sociétés ont été créés (relations clients / fournisseurs, etc. )
+
+# A vous de jouer !
+
+Idées de requêtes :
+
+- Quels sont les entités (personnes, entreprises, etc.) les plus connectées ?
+- Quelle est la distance moyennes séparent une personne à une entreprise ?
+- Avez-vous d'autres idées ?
