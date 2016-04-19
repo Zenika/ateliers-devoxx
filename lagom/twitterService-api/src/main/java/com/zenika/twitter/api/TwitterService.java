@@ -20,10 +20,13 @@ import static com.lightbend.lagom.javadsl.api.Service.*;
 public interface TwitterService extends Service {
 
     /**
-     * Example: curl http://localhost:9000/api/hello/Alice
+     * Returns one stream of tweets
      */
     ServiceCall<NotUsed, NotUsed, Source<String, ?>> tweets();
 
+    /**
+     * Updated the filter of tweets' stream
+     */
     ServiceCall<String, NotUsed, NotUsed> updatefilter();
 
     @Override
