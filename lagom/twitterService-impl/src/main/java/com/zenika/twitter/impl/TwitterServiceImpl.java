@@ -30,47 +30,6 @@ public class TwitterServiceImpl implements TwitterService {
     private final PubSubRegistry pubSub;
     private final Logger log = LoggerFactory.getLogger(TwitterServiceImpl.class);
 
-    @Inject
-    public TwitterServiceImpl(PubSubRegistry registry) {
-
-        pubSub = registry;
-        twitterStream = TwitterStreamBuilder.build();
-
-        log.info("Stream Launched");
-    }
-
-    @Override
-    public ServiceCall<String, NotUsed, NotUsed> updatefilter() {
-
-
-        return (id, request) -> {
-            twitterStream.clearListeners();
-            final PubSubRef<String> topic =
-                    pubSub.refFor(TopicId.of(String.class, "twitter"));
-            twitterStream.addListener(new FunctionnalStatusListener() {
-                @Override
-                public void onStatus(Status status) {
-                    topic.publish(status.getText());
-                }
-            });
-
-            twitterStream.filter(new FilterQuery(id));
-
-            return CompletableFuture.completedFuture(NotUsed.getInstance());
-        };
-    }
-
-    @Override
-    public ServerServiceCall<NotUsed, NotUsed, Source<String, ?>> tweets() {
-
-
-        return (id, request) -> {
-            final PubSubRef<String> topic =
-                    pubSub.refFor(TopicId.of(String.class, "twitter"));
-            return CompletableFuture.completedFuture(topic.subscriber());
-        };
-
-
-    }
+    
 }
 
