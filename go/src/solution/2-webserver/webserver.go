@@ -9,7 +9,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello there %s!", r.URL.Path[7:])
 }
 
-func webserver() {
+func Webserver() {
 	http.HandleFunc("/hello/", handler)
 	http.ListenAndServe(":9000", nil)
 }

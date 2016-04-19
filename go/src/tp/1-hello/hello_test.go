@@ -11,7 +11,7 @@ func TestPrintHello(t *testing.T){
 	osStdout := os.Stdout
 	r, w, _ := os.Pipe()
 	os.Stdout = w
-	printHelloWorld()
+	PrintHelloWorld()
 	w.Close()
 	out, _ := ioutil.ReadAll(r)
 	os.Stdout = osStdout

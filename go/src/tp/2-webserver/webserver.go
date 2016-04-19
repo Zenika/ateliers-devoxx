@@ -1,7 +1,7 @@
 package webserver
 
 //TODO: implement a webserver which responds "Hello there <user>!" to /hello/<user>
-func webserver() {
+func Webserver() {
 	//HINT: go has the package http which provides HTTP client and server implementations
 	// map the url "/hello/" to a handler function
 	// HINT: to have only part of a string, you can use the slice syntax string[beginIndex:]

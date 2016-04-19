@@ -8,7 +8,7 @@ import (
 )
 
 func TestWebserver(t *testing.T) {
-	go webserver()
+	go Webserver()
 	res, err := http.Get("http://127.0.0.1:9000/hello/devoxx")
 
 	if err != nil {
