@@ -9,7 +9,7 @@ import (
 
 func TestWebserver(t *testing.T) {
 	go webserver()
-	res, err := http.Get("http://127.0.0.1:8080/hello/devoxx")
+	res, err := http.Get("http://127.0.0.1:9000/hello/devoxx")
 
 	if err != nil {
 		t.Fatal("got an error when calling http server", err)
@@ -25,7 +25,7 @@ func TestWebserver(t *testing.T) {
 		t.Fatal("expected hello there devoxx!, got ", string(body))
 	}
 
-	res, err = http.Get("http://127.0.0.1:8080/hello/zenika")
+	res, err = http.Get("http://127.0.0.1:9000/hello/zenika")
 
 	if err != nil {
 		t.Fatal("got an error when calling http server", err)
