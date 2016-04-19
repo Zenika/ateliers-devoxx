@@ -1,6 +1,6 @@
 package webserver
 
-//TODO: implement a webserver which responds "Hello there <user>! to /hello/<user>"
+//TODO: implement a webserver which responds "Hello there <user>!" to /hello/<user>
 func webserver() {
 	//HINT: go has the package http which provides HTTP client and server implementations
 	// map the url "/hello/" to a handler function
