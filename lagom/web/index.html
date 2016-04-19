@@ -2,49 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Operations</title>
+    <title>Zenika - Twitter</title>
     <script src="js/jquery-2.2.3.min.js" type="application/javascript"></script>
+    <script src="js/vue.min.js" type="application/javascript"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <script type="application/javascript">
+        var ws
+        var example1
+
+        $(function(){
+            example1= new Vue({
+                el: '#timeline',
+                data: {
+                    items: [
+
+                    ]
+                }
+            });
+
+            WebSocketTest();
+        });
+
+
+        function updateFilter() {
+            $.get("http://localhost:9000/api/twitter/"+$("#filter").val());
+        }
+
+        function WebSocketTest() {
+
+            // Google example code
+            ws = new WebSocket("ws://localhost:9000/api/twitter");
+            ws.onopen = function () {
+
+
+                // Web Socket is connected. You can send data by send() method
+                console.log("ws open");
+            };
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+
+                $("#lasttweet").text(received_msg);
+
+                example1.items.push({ message: received_msg })
+
+
+            };
+
+            ws.onclose = function () { // websocket is closed. };
+                console.log("close ws");
+            }
+        }
+
+
+    </script>
 </head>
 <body>
 
-<script type="application/javascript">
-
-    $(function () {
 
 
-        socket.onopen = function () {
-            console.log("open")
-        };
-        socket.onmessage = function () {
-            console.log("change")
-        };
+<div class="page-header">
+    <h1>Zenika-Devoxx 2016 <small>Twitter</small></h1>
+</div>
+
+<div id="streamResultat">
+    <input type="text" value="" id="filter"/>
+</div>
+<div id="update filter">
+    <button value="Send!" onclick="updateFilter()" id="sender">update filter!</button>
+</div>
 
 
-        $.get("http://localhost:9000/api/hello/Louis", function (data) {
+<div id="lasttweet" class="panel panel-default">
+    <div class="panel-body">
+      waiting...
+    </div>
+</div>
 
-            console.log("data" + data);
-            $("#resultat").html(" resultat : " + data);
-
-        });
-
-        $("#sender").click(function (e) {
-            console.log("send!");
-            $.get("http://localhost:9000/api/hello/Louis", function (data) {
-
-                console.log("data" + data);
-                $("#resultat").html(" fom button : " + data);
-            });
-        })
-    });
-
-
-</script>
-
-
-<div id="resultat">test</div>
-<div id="streamResultat">test</div>
-<div id="send">
-    <button value="Send!" id="sender">send!</button>
+<div id="timeline">
+    <div v-for="item in items">
+        {{ item.message }}
+    </div>
 </div>
 </body>
 </html>
