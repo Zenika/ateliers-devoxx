@@ -33,39 +33,6 @@ public class TwitterServiceImpl implements TwitterService {
     private final Logger log = LoggerFactory.getLogger(TwitterServiceImpl.class);
 
 
-    @Inject
-    public TwitterServiceImpl(PubSubRegistry pubSub) {
-        this.pubSub = pubSub;
-        twitterStream = TwitterStreamBuilder.build();
-    }
-
-    @Override
-    public ServiceCall<NotUsed, NotUsed, Source<String, ?>> tweets() {
-        return (id, request) -> {
-            final PubSubRef<String> topic =
-                    pubSub.refFor(TopicId.of(String.class, ID));
-            return CompletableFuture.completedFuture(topic.subscriber());
-        };
-    }
-
-    @Override
-    public ServiceCall<String, NotUsed, NotUsed> updateFilter() {
-        twitterStream.clearListeners();
-
-
-        return (id, request) -> {
-            twitterStream.addListener((FunctionnalStatusListener) (status) -> {
-
-                final PubSubRef<String> topic =
-                        pubSub.refFor(TopicId.of(String.class, ID));
-                topic.publish(status.getText());
-            });
-
-            twitterStream.filter(new FilterQuery(id));
-            return CompletableFuture.completedFuture(NotUsed.getInstance());
-        };
-
-
-    }
+    //to be implemented
 }
 
