@@ -25,8 +25,7 @@ Pour facilité la réalisation du TP, voici quelques informations :
  - **sbt runAll** -> permet d'exécuter le projet
  - **com.zenika.ts.TwitterStreamBuilder** -> classe permettant de faciliter la création d'un stream sur le flux twitter
  - **com.zenika.ts.FunctionnalStatusListener** -> Interface exposant la seule méthode à implémenter pour récupérer le status courant du flux.
- - **[doc](
- )** -> documentation utile pour la réalisation du TP
+ - **[doc](http://www.lagomframework.com/documentation/1.0.x/PubSub.html)** -> documentation utile pour la réalisation du TP
  
 *Bien évidemment, toutes les questions trouveront réponses en vous adressant aux Zenikéens qui vous accompagne ;)*
 
