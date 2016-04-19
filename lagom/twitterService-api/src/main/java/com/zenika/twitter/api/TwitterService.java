@@ -27,13 +27,13 @@ public interface TwitterService extends Service {
     /**
      * Updated the filter of tweets' stream
      */
-    ServiceCall<String, NotUsed, NotUsed> updatefilter();
+    ServiceCall<String, NotUsed, NotUsed> updateFilter();
 
     @Override
     default Descriptor descriptor() {
         return named("twitterservice").with(
                 namedCall("/api/twitter", tweets()),
-                pathCall("/api/twitter/:filter", updatefilter()))
+                pathCall("/api/twitter/:filter", updateFilter()))
                 .withAutoAcl(true);
     }
 }
