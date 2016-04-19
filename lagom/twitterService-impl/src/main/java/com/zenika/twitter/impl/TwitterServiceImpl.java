@@ -16,8 +16,9 @@ import com.zenika.ts.TwitterStreamBuilder;
 import com.zenika.twitter.api.TwitterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import twitter4j.*;
-import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.FilterQuery;
+import twitter4j.Status;
+import twitter4j.TwitterStream;
 
 import java.util.concurrent.CompletableFuture;
 
