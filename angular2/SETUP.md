@@ -1,9 +1,27 @@
 ## Prérequis pour dérouler les exercices
 
-Ce fichier servira comme guide pour configurer les laptops que nous porterons à Devoxx.
+```bash
+# Install node
+wget  https://nodejs.org/dist/v5.10.1/node-v5.10.1-linux-x64.tar.xz
+tar xf node-v5.10.1-linux-x64.tar.xz
+sudo mkdir /usr/share/node
+sudo chown zenika:zenika /usr/share/node/
+mv node-v5.10.1-linux-x64 /usr/share/node/
+sudo ln -s /usr/share/node/node-v5.10.1-linux-x64/bin/node /usr/bin/node
+sudo ln -s /usr/share/node/node-v5.10.1-linux-x64/bin/npm /usr/bin/npm
 
-Il faudra lister tous les outils nécessaires pour dérouler les TP (frameworks, IDE, dépendances, etc...).
+# Install VS code
 
-#### Attention :
-1. Les laptop utiliseront Linux comme OS
-2. Ne comptez pas trop sur la connection Internet le jour de l'atelier : pensez à inclure tout ce qui permettrait de dérouler les TP en mode offline.
+# Install angular2-webpack-starter
+mkdir ~/frontend
+cd ~/frontend
+git clone https://github.com/ggaulard/angular2-webpack-starter
+cd angular2-webpack-starter
+npm Install
+
+# Install angular-cli
+cd ..
+git clone https://github.com/angular/angular-cli
+cd angular-cli
+npm install -g angular-cli
+```
