@@ -31,9 +31,9 @@ est défini comme un ensemble de noeuds (nodes) et un ensemble de liens (edges o
 Dans Neo4j :
 * les noeuds et les relations portent des données sous forme d'un ensemble de clé /
 valeur, on parle de "property graph"
-* les neouds peuvent avoir un ou plusieurs labels pour les caractériser (par exemple
+* les noeuds peuvent avoir un ou plusieurs labels pour les caractériser (par exemple
   un noeud peut avoir les labels "User" et "Admin" en même temps)
-* les relations ont un sens, c'est à dire un noeud de départ et un neoud de finie
+* les relations ont un sens, c'est à dire un noeud de départ et un noeud de fin
 * les relations sont caractérisées par un type, par exemple "IS_FRIEND_WITH"
 * il existe un langage de requête qui s'appelle Cypher
 
@@ -171,6 +171,15 @@ WHERE p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
 RETURN p, p2
 ```
 
+*Un équivalent de cette requête en SQL pourrait être*
+```
+SELECT p.*, p2.*
+FROM person p, person p2, family f
+WHERE ((p.id = f.pid1 AND f.pid2 = p2.id) OR (p.id = f.pid2 AND f.pid1 = p2.id))
+  AND p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
+```
+*où `family` serait une table d'association représentant les liens familiaux.*
+
 En exécutant la requête on découvre la présence d'un cercle famillial autour du
 président.
 
@@ -181,6 +190,8 @@ MATCH (p:Person)-[]-(c:Company)
 WHERE p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
 RETURN p, c
 ```
+
+*En SQL, on pourrait encore utiliser une table d'association `linked_to` pour encoder la relation `IS_LINKED_TO` de notre jeu de données, mais la requête Cypher est ici plus expressive, puisqu'elle retourne les personnes connectées à des entreprises par n'importe quelle relation.*
 
 Le président peut avoir plusieurs rôles au sein d'une même entreprise, il est
 possible d'aggréger ces derniers :
@@ -204,6 +215,16 @@ RETURN p, p2, c, c2
 Si le président n'est directement impliqué que dans une seule entreprise offshore,
 on ne peut pas en dire autant du cercle familial dans son ensemble.
 
+*Si la requête reste encore ici très lisible, c'est déjà moins le cas en SQL !*
+```
+SELECT p.*, p2.*, c.*, c2.*
+FROM person p, person p2, family f, company c, company c2, linked_to l, linked_to l2
+WHERE ((p.id = f.pid1 AND f.pid2 = p2.id) OR (p.id = f.pid2 AND f.pid1 = p2.id))
+  AND p.id = l.pid AND l.cid = c.id
+  AND p2.id = l2.pid AND l2.cid = c2.id
+  AND p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
+```
+
 ## Le rôle des intermédiaires
 
 ```
@@ -215,3 +236,5 @@ RETURN account, middlemen, president
 Le président n'est lié qu'avec une entreprise offshore, mais on se rend
 compte que ce lien lui ouvert de nombreuses entreprises offshore, et que des liens
 entre ces sociétés ont été créés (relations clients / fournisseurs, etc. )
+
+*On détermine ainsi les entreprises reliées au président par un nombre arbitraire de relations de n'importe quel type. Ce genre de requête n'est pas exprimable en SQL, sauf à écrire des requêtes assez lourdes utilisant des extensions non standards pour la récursivité, comme le `WITH RECURSIVE` de PostgreSQL.*
