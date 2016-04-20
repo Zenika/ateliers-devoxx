@@ -238,3 +238,12 @@ compte que ce lien lui ouvert de nombreuses entreprises offshore, et que des lie
 entre ces sociétés ont été créés (relations clients / fournisseurs, etc. )
 
 *On détermine ainsi les entreprises reliées au président par un nombre arbitraire de relations de n'importe quel type. Ce genre de requête n'est pas exprimable en SQL, sauf à écrire des requêtes assez lourdes utilisant des extensions non standards pour la récursivité, comme le `WITH RECURSIVE` de PostgreSQL.*
+
+
+# A vous de jouer !
+
+Idées de requêtes :
+
+- Quels sont les entités (personnes, entreprises, etc.) les plus connectées ?
+- Quelle est la distance moyennes séparent une personne à une entreprise ?
+- Avez-vous d'autres idées ?
