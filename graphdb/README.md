@@ -8,7 +8,7 @@ dans l'affaire du Panama Leak.
 Ce TP est issu de "Graph Gist" suivant : http://neo4j.com/graphgist/ec65c2fa-9d83-4894-bc1e-98c475c7b57a
 
 Les Graph Gists sont des documents markdown améliorés permettant de présenter un
-cas d'usage autour de la base de donnée Neo4j un intégrant une instance de base de
+cas d'usage autour de la base de donnée Neo4j en intégrant une instance de base de
 données et des requêtes avec le document.
 
 # Déroulement du TP
@@ -24,12 +24,12 @@ Neo4j est une base de donnée NoSQL de type graphe. C'est-à-dire que les donné
 dans la base de données sont stockées sous forme de graphe que l'on va pouvoir
 requêter et traverser.
 
-La base de données orientée graphe s'appuie sur la théorie des graphe. Un graphe
-se définie comme un ensemble de noeuds (nodes) et un ensemble de liens (edges ou
-  relationships) entre ces neouds.
+La base de données orientée graphe s'appuie sur la théorie des graphes. Un graphe
+est défini comme un ensemble de noeuds (nodes) et un ensemble de liens (edges ou
+  relationships) entre ces noeuds.
 
 Dans Neo4j :
-* les neouds et les relations portent des données sous forme d'un ensemble de clé /
+* les noeuds et les relations portent des données sous forme d'un ensemble de clé /
 valeur, on parle de "property graph"
 * les neouds peuvent avoir un ou plusieurs labels pour les caractériser (par exemple
   un noeud peut avoir les labels "User" et "Admin" en même temps)
@@ -202,7 +202,7 @@ RETURN p, p2, c, c2
 ```
 
 Si le président n'est directement impliqué que dans une seule entreprise offshore,
-on ne peut pas en dire autant du cercle famillial dans son ensemble.
+on ne peut pas en dire autant du cercle familial dans son ensemble.
 
 ## Le rôle des intermédiaires
 
