@@ -31,9 +31,9 @@ est défini comme un ensemble de noeuds (nodes) et un ensemble de liens (edges o
 Dans Neo4j :
 * les noeuds et les relations portent des données sous forme d'un ensemble de clé /
 valeur, on parle de "property graph"
-* les neouds peuvent avoir un ou plusieurs labels pour les caractériser (par exemple
+* les noeuds peuvent avoir un ou plusieurs labels pour les caractériser (par exemple
   un noeud peut avoir les labels "User" et "Admin" en même temps)
-* les relations ont un sens, c'est à dire un noeud de départ et un neoud de finie
+* les relations ont un sens, c'est à dire un noeud de départ et un noeud de fin
 * les relations sont caractérisées par un type, par exemple "IS_FRIEND_WITH"
 * il existe un langage de requête qui s'appelle Cypher
 
