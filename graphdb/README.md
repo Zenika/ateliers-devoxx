@@ -171,6 +171,15 @@ WHERE p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
 RETURN p, p2
 ```
 
+*Un équivalent de cette requête en SQL pourrait être*
+```
+SELECT p.*, p2.*
+FROM person p, person p2, family f
+WHERE ((p.id = f.pid1 AND f.pid2 = p2.id) OR (p.id = f.pid2 AND f.pid1 = p2.id))
+AND p.first_name = 'Ilham' AND p.last_name = 'Aliyev'
+```
+*où `family` serait une table d'association représentant les liens familiaux.*
+
 En exécutant la requête on découvre la présence d'un cercle famillial autour du
 président.
 
