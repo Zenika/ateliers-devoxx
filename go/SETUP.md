@@ -1,9 +1,18 @@
-## Prérequis pour dérouler les exercices
+1. Installer golang :
 
-Ce fichier servira comme guide pour configurer les laptops que nous porterons à Devoxx.
+```
+$ sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable
+$ sudo apt-get update
+$ sudo apt-get install golang
+```
 
-Il faudra lister tous les outils nécessaires pour dérouler les TP (frameworks, IDE, dépendances, etc...).
+2. Installer intellij community : 
+https://www.jetbrains.com/idea/download
 
-#### Attention :
-1. Les laptop utiliseront Linux comme OS
-2. Ne comptez pas trop sur la connection Internet le jour de l'atelier : pensez à inclure tout ce qui permettrait de dérouler les TP en mode offline.
+3. Installer le plugin go :
+* Dans le menu file > settings
+* Menu plugin > browse repositories
+* taper go et prendre le plugin (github : https://github.com/go-lang-plugin-org)
+* redémarrer intellij
+
+4. Setter la variable $GOPATH avec le chemin vers le répertoire de l'atelier go (i.e. /usr/home/bob/ateliers-devoxx/go)
