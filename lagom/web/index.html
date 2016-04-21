@@ -1,87 +1,108 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Zenika - Twitter</title>
-        <script src="js/jquery-2.2.3.min.js" type="application/javascript"></script>
-        <script src="js/vue.min.js" type="application/javascript"></script>
-        <script src="js/bootstrap.min.js" type="application/javascript"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zenika - Twitter</title>
+    <script src="js/jquery-2.2.3.min.js" type="application/javascript"></script>
+    <script src="js/vue.min.js" type="application/javascript"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
 
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
 
-        <script type="application/javascript">
-            var ws
-            var example1
+    <script type="application/javascript">
+        var ws
+        var example1
 
-            $(function () {
-                example1 = new Vue({
-                    el: '#timeline',
-                    data: {
-                        items: []
-                    }
-                });
-
-                WebSocketTest();
+        $(function () {
+            example1 = new Vue({
+                el: '#timeline',
+                data: {
+                    items: []
+                }
             });
 
+            WebSocketTest();
+        });
 
-            function updateFilter() {
-                $.get("http://localhost:9000/api/twitter/" + $("#filter").val());
+
+        function updateFilter() {
+            $.get("http://localhost:9000/api/twitter/" + $("#filter").val());
+            $("#currentFilter").text("#" + $("#filter").val());
+            $("#filter").val("");
+
+        }
+
+        function WebSocketTest() {
+
+            // Google example code
+            ws = new WebSocket("ws://localhost:9000/api/twitter");
+            ws.onopen = function () {
+
+
+                // Web Socket is connected. You can send data by send() method
+                console.log("ws open");
+            };
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+
+                $("#lasttweet").text(received_msg);
+
+                updateTimeline();
+                example1.items.push({message: received_msg})
+
+
+            };
+
+            ws.onclose = function () { // websocket is closed. };
+                console.log("close ws");
             }
 
-            function WebSocketTest() {
-
-                // Google example code
-                ws = new WebSocket("ws://localhost:9000/api/twitter");
-                ws.onopen = function () {
-
-
-                    // Web Socket is connected. You can send data by send() method
-                    console.log("ws open");
-                };
-                ws.onmessage = function (evt) {
-                    var received_msg = evt.data;
-
-                    $("#lasttweet").text(received_msg);
-
-                    example1.items.push({message: received_msg})
-
-
-                };
-
-                ws.onclose = function () { // websocket is closed. };
-                    console.log("close ws");
+            function updateTimeline() {
+                if (example1.items.length > 15) {
+                    example1.items.shift();
                 }
+
             }
 
-
-        </script>
-    </head>
-    <body background="aqua">
+        }
 
 
-    <div class="page-header">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="http://zenika.com/images/logo/Logo_arrondi_Horizontal.png">
-            </div>
-            <div class="col-md-6">
-                <h1>Devoxx 2016</h1>
-            </div>
+    </script>
+</head>
+<body>
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="http://zenika.com/images/logo/Logo_arrondi_Horizontal.png">
+        </div>
+        <div class="col-md-2">
+            <h1>Devoxx 2016</h1>
+        </div>
+        <div class="col-md-4">
+            <img src="img/lagom.png">
         </div>
     </div>
+</div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div id="update filter" class="col-md-2">
-                <button class="btn btn-info" type="button" value="update" onclick="updateFilter()">Update filter!
-                </button>
-            </div>
-            <div id="streamResultat" class="col-md-10">
-                <input type="text" class="form-control" value="" id="filter"/>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div id="update filter" class="col-md-2">
+            <button class="btn btn-info" type="button" value="update" onclick="updateFilter()">Update filter
+            </button>
         </div>
+        <div class="col-md-7">
+            <input type="text" class="form-control" value="" id="filter"/>
+        </div>
+
+        <h1>
+            <small>
+                <div id="currentFilter" class="col-md-3">
+                </div>
+            </small>
+        </h1>
         <div class="row">
             <div class="col-md-12"></div>
         </div>
@@ -92,42 +113,61 @@
             </div>
 
         </div>
+
         <div class="row">
+            <div class="col-md-12">&nbsp;</div>
 
-            <div class="col-md-12">
-
-            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">&nbsp;</div>
 
         </div>
 
+
         <div class="row">
 
-            <div class="col-md-1"></div>
-            <div id="lasttweet" class="col-md-10">
+            <div class="col-md-2">&nbsp;</div>
+
+            <div  class="col-md-10">
 
                 <h2>
-                    <small>Waiting...</small>
+                    <small>
+                        <div id="lasttweet">  Waiting...</div>
+                    </small>
                 </h2>
 
 
+
+
             </div>
-            <div class="col-md-1"></div>
+
 
         </div>
 
+
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><h3></h3></div>
-            <div class="col-md-4"></div>
+            <div class="col-md-12">&nbsp;</div>
+
         </div>
         <div class="row">
-            <div id="timeline" class="panel panel-default col-md-12">
+            <div class="col-md-12">&nbsp;</div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">&nbsp;</div>
+
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div id="timeline" class="panel panel-default col-md-8">
                 <div v-for="item in items">
                     {{ item.message }}
                 </div>
             </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 
-    </body>
-    </html>
+</body>
+</html>
